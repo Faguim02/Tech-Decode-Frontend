@@ -1,12 +1,9 @@
 import './App.css'
+import { Routers } from './router'
 
 function App() {
 
-  return (
-    <>
-      
-    </>
-  )
+  return <Routers/>
 }
 
 export default App
