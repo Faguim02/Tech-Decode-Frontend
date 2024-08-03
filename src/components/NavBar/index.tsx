@@ -11,13 +11,13 @@ export const NavBarComponent = () => {
         <nav className='px-5 py-2 shadow-md rounded-md'>
             <ul className='flex gap-8'>
                 <li>
-                    <Link to={""} className='text-slate-600 font-semibold'> <span>•</span> Inicio</Link>
+                    <Link to={""} className='text-slate-600 font-semibold focus:text-blue-500'> <span>•</span> Inicio</Link>
                 </li>
                 <li>
-                    <Link to={""} className='text-slate-600 font-semibold'> <span>•</span> Contato</Link>
+                    <Link to={""} className='text-slate-600 font-semibold focus:text-blue-500'> <span>•</span> Contato</Link>
                 </li>
                 <li>
-                    <Link to={""} className='text-slate-600 font-semibold'> <span>•</span> Sobre</Link>
+                    <Link to={""} className='text-slate-600 font-semibold focus:text-blue-500'> <span>•</span> Sobre</Link>
                 </li>
             </ul>
         </nav>

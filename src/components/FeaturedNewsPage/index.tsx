@@ -2,7 +2,7 @@ import image from '../../assets/preview.svg'
 
 const FeaturedNewsPage = () => {
   return (
-    <main className='flex items-start gap-4 mx-8 my-8 shadow-md rounded-lg'>
+    <main className='flex items-start gap-4 mx-8 my-16 shadow-md rounded-lg'>
         <figure className='w-1/2 h-full' style={{ height: '330px' }}>
             <img src={"https://blog.runrun.it/wp-content/uploads/2024/02/IA-Generativa_Blog.png.webp"} alt="a" className='rounded-lg object-cover h-full w-full'/>
         </figure>
