@@ -4,6 +4,7 @@ import { ContactPage } from "./pages/ContactPage"
 import { AboltPage } from "./pages/AboutPage"
 import { SearchPage } from "./pages/SearchPage"
 import { PostPage } from "./pages/PostPage"
+import { FooterComponent } from "./components/Footer"
 
 export const Routers = () => {
   return (
@@ -15,6 +16,8 @@ export const Routers = () => {
           <Route path="/about" element={<AboltPage/>}/>
           <Route  path="/search/:search" element={<SearchPage/>}/>
         </Routes>
+
+        <FooterComponent/>
     </BrowserRouter>
   )
 }
