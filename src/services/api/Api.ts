@@ -5,11 +5,11 @@ export default class Api {
     private adminCookie = new Cookies().get('admin_token')
 
     public user = axios.create({
-        baseURL: 'http://localhost:3000/',
+        baseURL: 'http://localhost:8080/',
     })
 
     public admin = axios.create({
-        baseURL: 'http://localhost:3000/',
+        baseURL: 'http://localhost:8080/',
         headers: {
             Authorization: `Bearer ${this.adminCookie}`
         }

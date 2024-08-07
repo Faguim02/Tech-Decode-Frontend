@@ -13,7 +13,7 @@ export default class PostService {
     }
 
     async findAllPosts(): Promise<postDto[]> {
-        const dataRes = await this.user.get('post/');
+        const dataRes = await this.user.get('post');
 
         return dataRes.data
     }
@@ -31,8 +31,14 @@ export default class PostService {
     }
 
     async deletePost(id: string): Promise<any> {
-        const dataRes = await this.admin.delete(`post/${id}`)
+        const dataRes = await this.admin.delete(`post/${id}`);
 
-        return dataRes.data
+        return dataRes.data;
+    }
+
+    async searchPosts(search: string) {
+        const dataRes = await this.user.get(`post/search/${search}`);
+
+        return dataRes.data;
     }
 }
