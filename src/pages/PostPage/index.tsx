@@ -1,10 +1,78 @@
+import { useEffect, useState } from "react"
+import { postDto } from "../../dtos/PostDto"
+import PostService from "../../services/api/postService"
+import { useParams } from "react-router-dom"
+import { Skeleton } from "@chakra-ui/react"
+
 export const PostPage = () => {
+
+  const [post, setPost] = useState<postDto | null>(null)
+
+  const { id } = useParams() as {id: string}
+
+  useEffect(()=>{
+    (async()=>{
+      const postService = new PostService()
+      const post = await postService.findOnePost(id)
+      setPost(post)
+      console.log(post)
+    })()
+  },[id])
+
+  if(!post) {
+    return (
+      <main style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 32
+      }}>
+        <Skeleton>
+          <div style={{
+          width: '100%',
+          height: '320px',
+        }}></div>
+        </Skeleton>
+
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 2,
+          width: '100%'
+        }}>
+          <div style={{width: '50%'}}>
+            <Skeleton w={40}>
+              <div>date</div>
+            </Skeleton>
+
+            <Skeleton w={80}>
+              <h1>Title</h1>
+            </Skeleton>
+          </div>
+        </div>
+
+        <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 2,
+        width: '100%'
+      }}>
+          <Skeleton width={'50%'} height={'300px'}>
+            <div>paragrafo</div>
+          </Skeleton>
+        </div>
+        <br />
+      </main>
+    )
+  }
+
   return (
     <main className='min-h-screen space-y-8 flex flex-col items-center'>
       <div style={{
         width: '100%',
         height: '320px',
-        background: "url(https://i.pinimg.com/564x/1f/87/b2/1f87b29a2df46100a75aa86b170a21cb.jpg)",
+        background: `url(${post.banner_url})`,
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -12,39 +80,32 @@ export const PostPage = () => {
       }}></div>
 
       <section className="space-y-2 w-1/2">
-        <span className="font-semibold text-slate-600">21 jan 2004</span>
+        <span className="font-semibold text-slate-600">{post.date_at}</span>
 
-        <h1 className="text-2xl font-bold text-slate-800">IA assume pela primeira vez na CEO</h1>
+        <h1 className="text-2xl font-bold text-slate-800">{post.title}</h1>
       </section>
 
       <p className="text-justify text-slate-600 w-1/2">
-      Lorem ipsum dolor sit amet. Et omnis voluptate et placeat consequatur et odio placeat qui accusamus delectus. Et saepe fugit ut doloremque minima cum sequi amet eos amet reiciendis aut voluptates incidunt.
-      33 quis placeat et voluptates minima hic quia laudantium et reprehenderit voluptatem ut molestias perspiciatis sit dolores rerum ut perferendis consequatur. Et reiciendis accusantium qui dolor dolorem sit accusantium perferendis ex odit voluptatibus et exercitationem distinctio est assumenda perferendis cum nobis eius? Sed quaerat aliquid At nihil velit sed tempora repudiandae ab eaque animi non tempora eligendi ab ratione velit?
-      Sed rerum quasi qui nihil Quis est temporibus praesentium sit odio asperiores et quia dolorem. Non amet velit ut facilis similique ut quod consequuntur.
+      {post.description}
       </p>
 
-      <a href="" className="text-blue-600 font-bold w-1/2">Fonte da notícia</a>
+      <a href={post.font} className="text-blue-600 font-bold w-1/2">Fonte da notícia</a>
 
       <div className="h-12"></div>
 
       <article className="w-1/2  space-y-10">
-        <h2 className="text-xl text-slate-700 font-bold">Comentarios <span className="bg-slate-800 text-slate-200 px-3 py-1 rounded text-sm">2</span></h2>
+        <h2 className="text-xl text-slate-700 font-bold">Comentarios <span className="bg-slate-800 text-slate-200 px-3 py-1 rounded text-sm">{post.comments?.length || 0}</span></h2>
 
         <ul className="space-y-4">
-          <li className="flex items-center space-x-2 shadow">
-            <img src="https://i.pinimg.com/564x/41/76/b9/4176b9b864c1947320764e82477c168f.jpg" alt="" className="w-10 h-10 rounded-full"/>
-            <section>
-              <span className="text-lg font-semibold text-slate-700">Pessoa</span>
-              <p className="text-slate-600">É verdade</p>
-            </section>
-          </li>
-          <li className="flex items-center space-x-2 shadow">
-            <img src="https://i.pinimg.com/564x/41/76/b9/4176b9b864c1947320764e82477c168f.jpg" alt="" className="w-10 h-10 rounded-full"/>
-            <section>
-              <span className="text-lg font-semibold text-slate-700">Pessoa</span>
-              <p className="text-slate-600">É verdade</p>
-            </section>
-          </li>
+          {post.comments && post.comments.map(coment => (
+            <li className="flex items-center space-x-2 shadow">
+              <img src="https://i.pinimg.com/564x/41/76/b9/4176b9b864c1947320764e82477c168f.jpg" alt="" className="w-10 h-10 rounded-full"/>
+              <section>
+                <span className="text-lg font-semibold text-slate-700">{coment.name}</span>
+                <p className="text-slate-600">{coment.comment}</p>
+              </section>
+            </li>
+          ))}
         </ul>
 
         <form className="flex flex-col space-y-2">
