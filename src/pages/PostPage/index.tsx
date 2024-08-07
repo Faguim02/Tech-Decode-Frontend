@@ -15,7 +15,6 @@ export const PostPage = () => {
       const postService = new PostService()
       const post = await postService.findOnePost(id)
       setPost(post)
-      console.log(post)
     })()
   },[id])
 

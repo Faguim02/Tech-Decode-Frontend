@@ -14,8 +14,6 @@ export const HomePage = () => {
       const postsService = new PostService()
       const posts = await postsService.findAllPosts()
       setPosts(posts)
-
-      console.log(posts)
     })()
   },[])
 
