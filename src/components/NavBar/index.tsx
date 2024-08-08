@@ -1,7 +1,20 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
+import { useState } from 'react'
 
 export const NavBarComponent = () => {
+
+    const [search, setSearch] = useState<string>()
+
+    const navigate = useNavigate()
+
+    async function handleSearchPost(event: any) {
+        event.preventDefault()
+
+        navigate(`/search/${search}`)
+
+    }
+
   return (
     <nav className='flex justify-between items-center px-5 py-2 shadow-md'>
         <figure>
@@ -22,8 +35,8 @@ export const NavBarComponent = () => {
             </ul>
         </nav>
 
-        <form>
-            <input type="text" placeholder='Pesquisar' className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
+        <form onSubmit={handleSearchPost}>
+            <input type="text" onChange={(e)=>setSearch(e.target.value)} placeholder='Pesquisar' className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
         </form>
     </nav>
   )
