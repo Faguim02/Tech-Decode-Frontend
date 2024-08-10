@@ -3,10 +3,14 @@ import { postDto } from "../../dtos/PostDto"
 import PostService from "../../services/api/postService"
 import { useParams } from "react-router-dom"
 import { Skeleton } from "@chakra-ui/react"
+import CommentService from "../../services/api/commentService"
+import { commentDto } from "../../dtos/ComentDto"
 
 export const PostPage = () => {
 
   const [post, setPost] = useState<postDto | null>(null)
+  const [commentValue, setCommentValue] = useState<string>()
+  const [user, setUser] = useState<string>()
 
   const { id } = useParams() as {id: string}
 
@@ -17,6 +21,21 @@ export const PostPage = () => {
       setPost(post)
     })()
   },[id])
+
+  async function handleCreateComment(event: any) {
+    event.preventDefault()
+
+    const newData = {
+      comment: commentValue,
+      name: user,
+      date: '',
+      post_id: id
+    } as commentDto
+
+    const commentService = new CommentService()
+    const comment = await commentService.createComment(newData)
+    console.log(comment)
+  }
 
   if(!post) {
     return (
@@ -107,9 +126,9 @@ export const PostPage = () => {
           ))}
         </ul>
 
-        <form className="flex flex-col space-y-2">
-          <input type="text" placeholder='Seu nome' className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
-          <textarea placeholder='Seu comentario' className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
+        <form className="flex flex-col space-y-2" onSubmit={handleCreateComment}>
+          <input type="text" onChange={(e)=>setUser(e.target.value)} placeholder='Seu nome' className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
+          <textarea placeholder='Seu comentario' onChange={(e)=>setCommentValue(e.target.value)} className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
           <button className='px-5 py-2 bg-slate-400 rounded-md font-semibold shadow-md hover:bg-slate-500 active:bg-slate-400 active:ring focus:ring-slate-500'>Ver mais</button>
         </form>
 
