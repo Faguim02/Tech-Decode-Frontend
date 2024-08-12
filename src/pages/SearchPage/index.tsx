@@ -9,7 +9,7 @@ import { SearchSkeleton } from './components/SearchSkeleton'
 export const SearchPage = () => {
 
   const { search } = useParams() as { search: string }
-  const [postsSearch, setPostsSearch] = useState<postDto[] | string | null>(null)
+  const [postsSearch, setPostsSearch] = useState<postDto[] | number | null>(null)
 
   useEffect(()=> {
     (async()=> {
@@ -17,7 +17,7 @@ export const SearchPage = () => {
       const postsSearch = await postService.searchPosts(search)
       setPostsSearch(postsSearch)
     })()
-  },[])
+  },[search])
 
   if(!postsSearch) {
     return (
@@ -37,13 +37,13 @@ export const SearchPage = () => {
     )
   }
 
-  if(typeof postsSearch === 'string') {
+  if(postsSearch == 404) {
     return (
       <>
         <NavBarComponent/>
         <ul className='p-16 min-h-screen rounded-md space-y-6'>
           <li>
-            <h3 className='text-lg font-bold text-slate-800'>{postsSearch}</h3>
+            <h3 className='text-lg font-bold text-slate-800'>Nenhuma noticia encontrada</h3>
           </li>
         </ul>
       </>
@@ -58,7 +58,7 @@ export const SearchPage = () => {
           <h3 className='text-lg font-bold text-slate-800'>Resultado de "{search}"</h3>
         </li>
         
-        {typeof postsSearch !== 'string' && postsSearch?.map(post => (
+        {typeof postsSearch !== 'number' && postsSearch?.map(post => (
           <SearchPost banner_url={post.banner_url} id={post.id} title={post.title} date_at={post.date_at} key={post.id}/>
         ))}
       </ul>
