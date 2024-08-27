@@ -37,8 +37,17 @@ export default class PostService {
     }
 
     async searchPosts(search: string) {
-        const dataRes = await this.user.get(`post/search/${search}`);
+        try {
+            const dataRes = await this.user.get(`post/search/${search}`);
 
-        return dataRes.data;
+            if(dataRes.status == 404) {
+                throw new Error()
+            }
+
+            return dataRes.data;
+        } catch (error: any) {
+            console.log()
+            return error.response.status
+        }
     }
 }

@@ -3,10 +3,10 @@ import Api from "./Api";
 
 export default class CommentService {
 
-    private admin = new Api().admin;
+    private user = new Api().user;
 
     async createComment(data: commentDto): Promise<commentDto> {
-        const dataRes = await this.admin.post(`comment`, data);
+        const dataRes = await this.user.post(`comment`, data);
 
         return dataRes.data;
     }
