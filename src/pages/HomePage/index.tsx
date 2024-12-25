@@ -28,7 +28,7 @@ export const HomePage = () => {
           {posts.map(post => (
             <PostComponent 
               key={post.id}
-              banner_url={post.banner_url}
+              bannerUrl={post.bannerUrl}
               date_at={post.date_at}
               id={post.id}
               title={post.title}
