@@ -30,6 +30,30 @@ export class UserService {
         }
     }
 
+    public async signUp(userDto: userDto): Promise<boolean | ErrorMessageDto> {
+        try {
+            userDto.role = 'COMMON';
+            await this.admin.post('auth/signUp', userDto);
+
+            return true;
+        } catch (error: any) {
+
+            if(error.response.status == 500) {
+                return {
+                    title: "Internal Server Error",
+                    message: "parece que sua internet não está tão boa",
+                    status: 500
+                } as ErrorMessageDto
+            }
+
+            return {
+                title: error.response.data.title,
+                message: error.response.data.message,
+                status: error.response.status
+            } as ErrorMessageDto
+        }
+    }
+
     private async saveCookie(token: string): Promise<void> {
         new Cookies().set('token', token)
     }
