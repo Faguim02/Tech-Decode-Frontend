@@ -59,7 +59,7 @@ export const SearchPage = () => {
         </li>
         
         {typeof postsSearch !== 'number' && postsSearch?.map(post => (
-          <SearchPost banner_url={post.banner_url} id={post.id} title={post.title} date_at={post.date_at} key={post.id}/>
+          <SearchPost bannerUrl={post.bannerUrl} id={post.id} title={post.title} date_at={post.date_at} key={post.id}/>
         ))}
       </ul>
     </>

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { postDto } from '../../../dtos/PostDto'
 import { motion } from 'framer-motion'
 
-export const SearchPost = ({id, banner_url, date_at, title}:postDto) => {
+export const SearchPost = ({id, bannerUrl, date_at, title}:postDto) => {
 
   const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ export const SearchPost = ({id, banner_url, date_at, title}:postDto) => {
     transition={{duration: 0.8, type: 'spring'}}
     onClick={()=>{navigate(`/notice/${id}`)}}
     >
-      <img src={banner_url} alt={title} className='rounded-md object-cover' style={{
+      <img src={bannerUrl} alt={title} className='rounded-md object-cover' style={{
         width: '200px',
         height: '180px'
       }}/>
