@@ -6,6 +6,7 @@ import { SearchPage } from "./pages/SearchPage"
 import { PostPage } from "./pages/PostPage"
 import { FooterComponent } from "./components/Footer"
 import SignInPage from "./pages/SignInPage"
+import SignUpPage from "./pages/SignUpPage"
 
 export const Routers = () => {
   return (
@@ -17,6 +18,7 @@ export const Routers = () => {
           <Route path="/about" element={<AboltPage/>}/>
           <Route  path="/search/:search" element={<SearchPage/>}/>
           <Route path="/signIn" element={<SignInPage/>}/>
+          <Route path="/signUp" element={<SignUpPage/>}/>
           <Route path="*" element={<h1>Not Found</h1>}/>
         </Routes>
 
