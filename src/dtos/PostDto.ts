@@ -4,7 +4,7 @@ export type postDto = {
     id: string;
     title: string;
     date_at: string,
-    banner_url: string,
+    bannerUrl: string,
     description?: string,
     comments?: commentDto[],
     font?: string

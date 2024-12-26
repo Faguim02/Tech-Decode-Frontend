@@ -90,7 +90,7 @@ export const PostPage = () => {
       <div style={{
         width: '100%',
         height: '320px',
-        background: `url(${post.banner_url})`,
+        background: `url(${post.bannerUrl})`,
         backgroundAttachment: "fixed",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",

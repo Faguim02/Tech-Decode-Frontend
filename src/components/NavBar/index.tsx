@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
+import { FaRegUser } from "react-icons/fa";
 import { useState } from 'react'
 
 export const NavBarComponent = () => {
@@ -35,9 +36,15 @@ export const NavBarComponent = () => {
             </ul>
         </nav>
 
-        <form onSubmit={handleSearchPost}>
-            <input type="text" onChange={(e)=>setSearch(e.target.value)} placeholder='Pesquisar' className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
-        </form>
+        <div className='flex gap-4'>
+            <form onSubmit={handleSearchPost}>
+                <input type="text" onChange={(e)=>setSearch(e.target.value)} placeholder='Pesquisar' className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
+            </form>
+
+            <button onClick={()=>navigate('signIn')} className='px-5 py-1 bg-slate-400 rounded-md font-semibold shadow-md hover:bg-slate-500 active:bg-slate-400 active:ring focus:ring-slate-500'>
+                <FaRegUser/>
+            </button>
+        </div>
     </nav>
   )
 }
