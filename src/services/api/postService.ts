@@ -24,6 +24,12 @@ export default class PostService {
         return dataRes.data;
     }
 
+    async findByCategory(category_id: string): Promise<postDto> {
+        const dataRes = await this.user.get(`post/category/${category_id}`);
+
+        return dataRes.data;
+    }
+
     async editPost(id: string, data: postDto): Promise<postDto> {
         const dataRes = await this.admin.put(`post/${id}`, data);
 
