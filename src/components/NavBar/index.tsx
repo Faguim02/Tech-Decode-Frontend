@@ -18,7 +18,7 @@ export const NavBarComponent = () => {
 
   return (
     <nav className='flex justify-between items-center px-5 py-2 shadow-md'>
-        <figure>
+        <figure onClick={()=>navigate('/')} className='cursor-pointer'>
             <img src={logo} alt="logo" />
         </figure>
 
