@@ -2,7 +2,7 @@ import axios from 'axios'
 import Cookies from 'cookies-ts'
 
 export default class Api {
-    private adminCookie = new Cookies().get('admin_token')
+    private adminCookie = new Cookies().get('token')
 
     public user = axios.create({
         baseURL: 'http://localhost:8080/',
