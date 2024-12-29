@@ -6,6 +6,7 @@ import Cookies from "cookies-ts";
 export default class CommentService {
 
     private user = new Api().user;
+    private admin = new Api().admin;
 
     async createComment(data: commentDto): Promise<boolean | ErrorMessageDto> {
 
@@ -17,6 +18,32 @@ export default class CommentService {
                     Authorization: `Bearer ${token}`
                 }
             });
+
+            return true;
+            
+        } catch (error: any) {
+
+            if(error.response.status == 500) {
+                return {
+                    title: "Internal Server Error",
+                    message: "parece que sua internet não está tão boa",
+                    status: 500
+                } as ErrorMessageDto
+            }
+
+            return {
+                title: error.response.data.title,
+                message: error.response.data.message,
+                status: error.response.status
+            } as ErrorMessageDto
+        }
+
+    }
+
+    async deleteComment(id: string): Promise<boolean | ErrorMessageDto> {
+        
+        try {
+            await this.admin.delete(`comment/${id}`);
 
             return true;
             
