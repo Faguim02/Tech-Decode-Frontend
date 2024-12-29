@@ -19,7 +19,7 @@ export class CategoryService {
   async createCategory(data: categoryDto): Promise<boolean | ErrorMessageDto> {
     try {
         
-        const response = await new Api().admin.post('category', data)
+        await new Api().admin.post('category', data)
         return true;
 
     } catch (error: any) {
