@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import LeftNavigation from "../../components/LeftNavigation";
 import { categoryDto } from "../../dtos/CategoryDto";
-import { useNavigate } from "react-router-dom";
 import { CategoryService } from "../../services/api/categoryService";
 
 export default function CategoryAdmin() {
 
     const [categories, setCategories] = useState<categoryDto[]>([]);
-
-    const navigate = useNavigate();
 
     useEffect(()=>{
         (async()=>{
