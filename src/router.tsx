@@ -9,6 +9,10 @@ import SignInPage from "./pages/SignInPage"
 import SignUpPage from "./pages/SignUpPage"
 import CategoryPage from "./pages/CategoryPage"
 import SignUpPageAdmin from "./pages/SignUpAdmin"
+import DashBoardPage from "./pages/DashBoardPage"
+import NewsAdmin from "./pages/NewsAdmin"
+import CategoryAdmin from "./pages/CategoryAdmin"
+import CreateNewsAdmin from "./pages/CreateNewsAdmin"
 
 export const Routers = () => {
   return (
@@ -23,6 +27,10 @@ export const Routers = () => {
           <Route path="/signUp" element={<SignUpPage/>}/>
           <Route path="/signUp/admin" element={<SignUpPageAdmin/>}/>
           <Route path="/category/:id" element={<CategoryPage/>}/>
+          <Route path="/admin/dashboard" element={<DashBoardPage/>}/>
+          <Route path="/admin/news" element={<NewsAdmin/>}/>
+          <Route path="/admin/category" element={<CategoryAdmin/>}/>
+          <Route path="/admin/createNews" element={<CreateNewsAdmin/>}/>
           <Route path="*" element={<h1>Not Found</h1>}/>
         </Routes>
 
