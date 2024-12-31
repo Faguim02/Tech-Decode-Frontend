@@ -1,3 +1,4 @@
+import { categoryDto } from "./CategoryDto";
 import { commentDto } from "./ComentDto";
 
 export type postDto = {
@@ -7,5 +8,6 @@ export type postDto = {
     bannerUrl: string,
     description?: string,
     comments?: commentDto[],
+    category?: categoryDto
     font?: string
 }

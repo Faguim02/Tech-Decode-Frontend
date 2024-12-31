@@ -1,6 +1,9 @@
+import { postDto } from "./PostDto"
+
 export type commentDto = {
-    name: string,
+    id?: string,
+    username: string,
     comment: string,
-    post_id?: string,
-    date?: string
+    post?: postDto,
+    date_at?: string
 }
