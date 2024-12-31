@@ -1,3 +1,4 @@
+import { ErrorMessageDto } from "../../dtos/ErrorMessageDto";
 import { postDto } from "../../dtos/PostDto";
 import Api from "./Api";
 
@@ -6,10 +7,48 @@ export default class PostService {
     private admin = new Api().admin;
     private user = new Api().user;
 
-    async createPost(data: postDto): Promise<postDto> {
-        const dataRes = await this.admin.post('post/', data);
+    async createPost(data: postDto, image: File): Promise<boolean | ErrorMessageDto> {
 
-        return dataRes.data;
+        const formData = new FormData();
+        formData.append('photo', image);
+        formData.append('title', data.title);
+        formData.append('description', data.description || '');
+        formData.append('category_id', data.category?.id || '');
+        formData.append('font', data.font || '');
+
+        try {
+            
+            await this.admin.post('post', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            return {status: 201} as ErrorMessageDto;
+
+        } catch (error: any) {
+            if(error.response.status == 500) {
+                return {
+                    title: "Internal Server Error",
+                    message: "parece que sua internet não está tão boa",
+                    status: 500
+                } as ErrorMessageDto
+            }
+
+            if(error.response.status == 403) {
+                return {
+                    title: "forbidden",
+                    message: "você não tem permissão para fazer isso",
+                    status: 403
+                } as ErrorMessageDto
+            }
+
+            return {
+                title: error.response.data.title,
+                message: error.response.data.message,
+                status: error.response.status
+            } as ErrorMessageDto
+        }
     }
 
     async findAllPosts(): Promise<postDto[]> {
@@ -36,10 +75,37 @@ export default class PostService {
         return dataRes.data;        
     }
 
-    async deletePost(id: string): Promise<any> {
-        const dataRes = await this.admin.delete(`post/${id}`);
+    async deletePost(id: string): Promise<ErrorMessageDto> {
+        try {
+            await this.admin.delete(`post/${id}`);
 
-        return dataRes.data;
+            return {
+                status: 200,
+                title: "Noticia deletada com sucesso",
+                message: "A noticia foi deletada com sucesso"
+            } as ErrorMessageDto;
+        } catch (error: any) {
+            if(error.response.status == 500) {
+                return {
+                    title: "Internal Server Error",
+                    message: "parece que sua internet não está tão boa",
+                    status: 500
+                } as ErrorMessageDto
+            }
+            if(error.response.status == 403) {
+                return {
+                    title: "forbidden",
+                    message: "você não tem permissão para fazer isso",
+                    status: 403
+                } as ErrorMessageDto
+            }
+    
+            return {
+                title: error.response.data.title,
+                message: error.response.data.message,
+                status: error.response.status
+            } as ErrorMessageDto
+        }
     }
 
     async searchPosts(search: string) {
