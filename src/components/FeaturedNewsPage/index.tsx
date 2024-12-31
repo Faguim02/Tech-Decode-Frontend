@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import image from '../../assets/preview.svg'
 import { postDto } from '../../dtos/PostDto'
 
 interface FeaturedNewsPageProps {
