@@ -8,18 +8,22 @@ export default class CommentService {
     private user = new Api().user;
     private admin = new Api().admin;
 
-    async createComment(data: commentDto): Promise<boolean | ErrorMessageDto> {
+    async createComment(data: commentDto): Promise<ErrorMessageDto> {
 
         try {
             let token = new Cookies().get("token");
 
-            const dataRes = await this.user.post(`comment`, data, {
+            await this.user.post(`comment`, data, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
 
-            return true;
+            return {
+                title: "Comentário criado",
+                message: "seu comentário foi criado com sucesso",
+                status: 201
+            } as ErrorMessageDto
             
         } catch (error: any) {
 
@@ -28,6 +32,14 @@ export default class CommentService {
                     title: "Internal Server Error",
                     message: "parece que sua internet não está tão boa",
                     status: 500
+                } as ErrorMessageDto
+            }
+
+            if(error.response.status == 403) {
+                return {
+                    title: "forbidden",
+                    message: "crie uma conta para comentar",
+                    status: 403
                 } as ErrorMessageDto
             }
 
