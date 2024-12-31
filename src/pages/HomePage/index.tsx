@@ -12,6 +12,7 @@ export const HomePage = () => {
 
   const [posts, setPosts] = useState<postDto[]>([])
   const [categories, setCategories] = useState<categoryDto[]>([]);
+  const [news, setNews] = useState<postDto | null>(null)
 
   const navigate = useNavigate();
 
@@ -28,13 +29,16 @@ export const HomePage = () => {
       }
       
       setCategories(categories)
+      const news = await postsService.findOnePost(posts[0].id as string);
+      setNews(news);
+
     })()
-  },[])
+  },[posts])
 
   return (
     <>
       <NavBarComponent/>
-      <FeaturedNewsPage/>
+      <FeaturedNewsPage news={news as postDto}/>
 
       <ul className='flex flex-wrap px-8 gap-4'>
         {categories.map(category => (
