@@ -15,20 +15,21 @@ export default function CategoryPage() {
     const { id } = useParams() as {id: string};
 
     useEffect(()=>{
-    (async()=>{    
-        const categories = await new CategoryService().findAllCategories();
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        (async()=>{    
+            const categories = await new CategoryService().findAllCategories();
 
-        if(categories === null) {
-        return;
-        }
-        
-        setCategories(categories)
+            if(categories === null) {
+            return;
+            }
+            
+            setCategories(categories)
 
-        const category = await new PostService().findByCategory(id);
-        setCategory(category);
+            const category = await new PostService().findByCategory(id);
+            setCategory(category);
 
-        console.log(category)
-    })()
+            console.log(category)
+        })()
     },[id])
     
     return (
