@@ -10,11 +10,11 @@ const FeaturedNewsPage = (news: FeaturedNewsPageProps) => {
   const navigate = useNavigate()
 
   return (
-    <main className='flex items-start gap-4 mx-8 my-16 shadow-md rounded-lg'>
-        <figure className='w-1/2 h-full' style={{ height: '330px' }}>
+    <main className='flex items-start flex-col gap-4 mx-8 my-16 shadow-md rounded-lg sm:flex-row'>
+        <figure className='w-full h-full sm:w-1/2' style={{ height: '330px' }}>
             <img src={news?.news?.bannerUrl} alt="imagem" className='rounded-lg object-cover h-full w-full'/>
         </figure>
-        <article className='flex-col space-y-4 w-1/2 p-4'>
+        <article className='flex-col space-y-4 w-full p-4 md:w-1/2'>
             <span className='text-slate-400'>{news?.news?.date_at}</span>
             <h1 className='text-2xl font-bold text-slate-800'>{news?.news?.title}</h1>
             <div style={{height: '150px', overflow: 'hidden'}}>
