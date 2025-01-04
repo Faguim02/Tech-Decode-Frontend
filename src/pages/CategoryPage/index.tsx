@@ -34,7 +34,7 @@ export default function CategoryPage() {
     
     return (
         <div>
-            <NavBarComponent/>
+            <NavBarComponent category={categories}/>
 
             <h1 className="p-8 text-xl font-bold text-slate-800">{category?.title}</h1>
 
