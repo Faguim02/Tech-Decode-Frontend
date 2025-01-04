@@ -37,7 +37,7 @@ export const HomePage = () => {
 
   return (
     <>
-      <NavBarComponent/>
+      <NavBarComponent category={categories}/>
       <FeaturedNewsPage news={news as postDto}/>
 
       <ul className='flex flex-wrap px-8 gap-4'>

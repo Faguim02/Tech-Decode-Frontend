@@ -15,10 +15,7 @@ export const SearchPost = ({id, bannerUrl, date_at, title}:postDto) => {
     transition={{duration: 0.8, type: 'spring'}}
     onClick={()=>{navigate(`/notice/${id}`)}}
     >
-      <img src={bannerUrl} alt={title} className='rounded-md object-cover' style={{
-        width: '200px',
-        height: '180px'
-      }}/>
+      <img src={bannerUrl} alt={title} className='rounded-md object-cover h-24 min-w-28 max-w-28 md:min-w-52 md:max-w-52 md:h-48'/>
       <section className='py-1'>
         <h2 className='text-lg font-bold text-slate-800'>{title}</h2>
         <span className='text-sm font-semibold text-slate-600'>{date_at}</span>
