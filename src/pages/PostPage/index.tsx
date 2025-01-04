@@ -129,21 +129,21 @@ export const PostPage = () => {
         backgroundSize: 'cover'
       }}></div>
 
-      <section className="space-y-2 w-1/2">
+      <section className="space-y-2 w-full px-4 md:w-1/2">
         <span className="font-semibold text-slate-600">{post.date_at}</span>
 
         <h1 className="text-2xl font-bold text-slate-800">{post.title}</h1>
       </section>
 
-      <p className="text-justify text-slate-600 w-1/2">
+      <p className="text-justify text-slate-600 px-4 md:w-1/2">
       {post.description}
       </p>
 
-      <a href={post.font} className="text-blue-600 font-bold w-1/2">Fonte da notícia</a>
+      <a href={post.font} className="text-blue-600 font-bold px-4 md:w-1/2">Fonte da notícia</a>
 
       <div className="h-12"></div>
 
-      <article className="w-1/2  space-y-10">
+      <article className="px-4 w-full md:w-1/2 space-y-10">
         <h2 className="text-xl text-slate-700 font-bold">Comentarios <span className="bg-slate-800 text-slate-200 px-3 py-1 rounded text-sm">{post.comments?.length || 0}</span></h2>
 
         <ul className="space-y-4">
@@ -161,7 +161,7 @@ export const PostPage = () => {
           ))}
         </ul>
 
-        <form className="flex flex-col space-y-2" onSubmit={handleCreateComment}>
+        <form className="flex flex-col space-y-2 px-1 md:w-1/2" onSubmit={handleCreateComment}>
           <textarea placeholder='Seu comentario' onChange={(e)=>setCommentValue(e.target.value)} value={commentValue} className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100'/>
           <button className='px-5 py-2 bg-slate-400 rounded-md font-semibold shadow-md hover:bg-slate-500 active:bg-slate-400 active:ring focus:ring-slate-500'>Publicar</button>
         </form>

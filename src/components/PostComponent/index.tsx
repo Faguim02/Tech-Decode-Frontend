@@ -16,7 +16,7 @@ export const PostComponent = ({ bannerUrl, date_at, title, id }: postDto) => {
     className='cursor-pointer flex-col space-y-1 hover:scale-105 focus:border-2 focus:border-slate-400' style={{transition: '0.3s'}}
     onClick={() => navigate(`/notice/${id}`)}
     >
-        <img src={bannerUrl} alt={title} className='rounded-lg object-none' style={{
+        <img src={bannerUrl} alt={title} className='rounded-lg object-cover' style={{
             height: '250px',
             width: '100%'
         }}/>

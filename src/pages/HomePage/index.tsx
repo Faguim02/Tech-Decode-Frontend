@@ -29,7 +29,7 @@ export const HomePage = () => {
       }
       
       setCategories(categories)
-      const news = await postsService.findOnePost(posts[0].id as string);
+      const news = await postsService.findOnePost(posts[(posts.length) - 1].id as string);
       setNews(news);
 
     })()
@@ -37,7 +37,7 @@ export const HomePage = () => {
 
   return (
     <>
-      <NavBarComponent/>
+      <NavBarComponent category={categories}/>
       <FeaturedNewsPage news={news as postDto}/>
 
       <ul className='flex flex-wrap px-8 gap-4'>
@@ -48,7 +48,7 @@ export const HomePage = () => {
 
       <article className='mx-8 py-8'>
         <h2 className='text-xl font-bold py-4'>Todas as noticias</h2>
-        <section className='grid grid-cols-3 gap-x-8 gap-y-12'>
+        <section className='grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3'>
           {posts.map(post => (
             <PostComponent 
               key={post.id}
