@@ -86,16 +86,10 @@ export const NavBarComponent = ({category}: NavBarProps) => {
                     <Divider/>
                     <ul className='flex flex-col gap-2'>
                         {category.map(category => (
-                            <li key={category.id} onClick={()=> navigate(`category/${category.id}`)} className='p-4 cursor-pointer hover:bg-slate-200 active:bg-slate-300'>{category.name}</li>
+                            <li key={category.id} onClick={()=> navigate(`/category/${category.id}`)} className='p-4 cursor-pointer hover:bg-slate-200 active:bg-slate-300'>{category.name}</li>
                         ))}
                     </ul>
                 </div>
-
-                {/* <ul className='flex flex-wrap px-8 gap-4'>
-        {categories.map(category => (
-          <li key={category.id} onClick={()=> navigate(`category/${category.id}`)} className='p-4 bg-slate-100 rounded-lg shadow-sm cursor-pointer hover:bg-slate-200 active:bg-slate-300'>{category.name}</li>
-        ))}
-      </ul> */}
             </DrawerBody>
 
             <DrawerFooter>
