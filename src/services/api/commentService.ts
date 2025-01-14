@@ -1,23 +1,16 @@
 import { commentDto } from "../../dtos/ComentDto";
 import { ErrorMessageDto } from "../../dtos/ErrorMessageDto";
 import Api from "./Api";
-import Cookies from "cookies-ts";
 
 export default class CommentService {
 
-    private user = new Api().user;
-    private admin = new Api().admin;
+    private userAuthenticated = new Api().userAuthenticated;
 
     async createComment(data: commentDto): Promise<ErrorMessageDto> {
 
         try {
-            let token = new Cookies().get("token");
 
-            await this.user.post(`comment`, data, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            await this.userAuthenticated.post(`comment`, data);
 
             return {
                 title: "Comentário criado",
@@ -55,7 +48,7 @@ export default class CommentService {
     async deleteComment(id: string): Promise<boolean | ErrorMessageDto> {
         
         try {
-            await this.admin.delete(`comment/${id}`);
+            await this.userAuthenticated.delete(`comment/${id}`);
 
             return true;
             

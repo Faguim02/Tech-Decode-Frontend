@@ -6,7 +6,7 @@ export class CategoryService {
   async findAllCategories(): Promise<categoryDto[] | null> {
     try {
         
-        const response = await new Api().user.get('category')
+        const response = await new Api().userAuthenticated.get('category')
         return response.data;
 
     } catch (error: any) {
@@ -19,7 +19,7 @@ export class CategoryService {
   async createCategory(data: categoryDto): Promise<ErrorMessageDto> {
     try {
         
-        await new Api().admin.post('/category', data)
+        await new Api().userAuthenticated.post('/category', data)
         return {
             status: 201,
             title: "Categoria criada com sucesso",
@@ -55,7 +55,7 @@ export class CategoryService {
 
 async deleteCategory(id: string): Promise<ErrorMessageDto> {
     try {        
-        await new Api().admin.delete(`/category/${id}`)
+        await new Api().userAuthenticated.delete(`/category/${id}`)
         return {
             status: 200,
             title: "Categoria deletada com sucesso",

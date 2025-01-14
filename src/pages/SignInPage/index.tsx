@@ -53,11 +53,11 @@ export default function SignInPage() {
   }
 
   return (
-    <div className='flex flex-row justify-center items-center h-screen' style={{backgroundColor: '#ECEBE4'}}>
+    <div className='flex md:flex-row flex-col justify-center items-center h-screen' style={{backgroundColor: '#ECEBE4'}}>
       
-      <img src={ilustration} alt="Preview" className='h-3/4 rounded-l-md'/>
+      <img src={ilustration} alt="Preview" className='h-3/4 rounded-l-md hidden md:flex'/>
 
-      <form className="flex flex-col w-1/3 bg-white px-10 h-3/4 gap-4 justify-center rounded-r-md" onSubmit={handleSubmit}>
+      <form className="flex flex-col md:w-1/3 sm:w-2/3 w-4/5 bg-white px-10 h-3/4 gap-4 justify-center md:rounded-r-md rounded-md" onSubmit={handleSubmit}>
         <h1 className='text-xl text-center font-bold'>Acessar conta</h1>
         <input type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} value={email} className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100' required/>
         <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} value={password} className='px-5 py-2 border-solid border-2 border-slate-100 rounded-md utline outline-offset-2 outline-2 outline-slate-100' required/>

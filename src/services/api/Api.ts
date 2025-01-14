@@ -3,13 +3,14 @@ import Cookies from 'cookies-ts'
 
 export default class Api {
     private adminCookie = new Cookies().get('token')
+    private baseURL: string = 'https://api.techdecode.com'
 
-    public user = axios.create({
-        baseURL: 'http://ec2-54-209-212-173.compute-1.amazonaws.com/',
+    public userAll = axios.create({
+        baseURL: this.baseURL,
     })
 
-    public admin = axios.create({
-        baseURL: 'http://ec2-54-209-212-173.compute-1.amazonaws.com/',
+    public userAuthenticated = axios.create({
+        baseURL: this.baseURL,
         headers: {
             Authorization: `Bearer ${this.adminCookie}`
         }
