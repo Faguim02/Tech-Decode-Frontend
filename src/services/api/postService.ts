@@ -4,8 +4,8 @@ import Api from "./Api";
 
 export default class PostService {
 
-    private admin = new Api().admin;
-    private user = new Api().user;
+    private userAutenticated = new Api().userAuthenticated;
+    private userAll = new Api().userAll;
 
     async createPost(data: postDto, image: File): Promise<boolean | ErrorMessageDto> {
 
@@ -18,11 +18,7 @@ export default class PostService {
 
         try {
             
-            await this.admin.post('post', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
+            await this.userAutenticated.post('post', formData);
 
             return {status: 201} as ErrorMessageDto;
 
@@ -52,32 +48,32 @@ export default class PostService {
     }
 
     async findAllPosts(): Promise<postDto[]> {
-        const dataRes = await this.user.get('post');
+        const dataRes = await this.userAll.get('post');
 
         return dataRes.data
     }
 
     async findOnePost(id: string): Promise<postDto> {
-        const dataRes = await this.user.get(`post/${id}`);
+        const dataRes = await this.userAll.get(`post/${id}`);
 
         return dataRes.data;
     }
 
     async findByCategory(category_id: string): Promise<postDto> {
-        const dataRes = await this.user.get(`post/category/${category_id}`);
+        const dataRes = await this.userAll.get(`post/category/${category_id}`);
 
         return dataRes.data;
     }
 
     async editPost(id: string, data: postDto): Promise<postDto> {
-        const dataRes = await this.admin.put(`post/${id}`, data);
+        const dataRes = await this.userAutenticated.put(`post/${id}`, data);
 
         return dataRes.data;        
     }
 
     async deletePost(id: string): Promise<ErrorMessageDto> {
         try {
-            await this.admin.delete(`post/${id}`);
+            await this.userAutenticated.delete(`post/${id}`);
 
             return {
                 status: 200,
@@ -110,7 +106,7 @@ export default class PostService {
 
     async searchPosts(search: string) {
         try {
-            const dataRes = await this.user.get(`post/search/${search}`);
+            const dataRes = await this.userAll.get(`post/search/${search}`);
 
             if(dataRes.status == 404) {
                 throw new Error()

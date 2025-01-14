@@ -4,13 +4,13 @@ import Api from "./Api";
 import Cookies from 'cookies-ts'
 
 export class UserService {
-    private admin = new Api().admin;
-    private user = new Api().user;
+    private userAuthenticated = new Api().userAuthenticated;
+    private userAll = new Api().userAll;
 
     public async signIn(userDto: userDto): Promise<boolean | ErrorMessageDto> {
         
         try {
-            let token = await this.user.post('auth/signIn', userDto);
+            let token = await this.userAll.post('auth/signIn', userDto);
 
             console.log(token.data)  
 
@@ -33,7 +33,7 @@ export class UserService {
 
     public async signUp(userDto: userDto): Promise<boolean | ErrorMessageDto> {
         try {
-            await this.user.post('auth/signUp', userDto);
+            await this.userAll.post('auth/signUp', userDto);
 
             return true;
         } catch (error: any) {
@@ -56,7 +56,7 @@ export class UserService {
 
     public async signUpAdmin(userDto: userDto): Promise<boolean | ErrorMessageDto> {
         try {
-            await this.admin.post('auth/signUp/admin', userDto);
+            await this.userAuthenticated.post('auth/signUp/admin', userDto);
 
             return true;
         } catch (error: any) {
