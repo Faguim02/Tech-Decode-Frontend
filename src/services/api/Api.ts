@@ -3,7 +3,7 @@ import Cookies from 'cookies-ts'
 
 export default class Api {
     private adminCookie = new Cookies().get('token')
-    private baseURL: string = 'https://api.techdecode.com'
+    private baseURL: string = 'https://api.techdecode.com.br'
 
     public userAll = axios.create({
         baseURL: this.baseURL,
