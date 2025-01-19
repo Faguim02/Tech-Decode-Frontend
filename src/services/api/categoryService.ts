@@ -6,7 +6,7 @@ export class CategoryService {
   async findAllCategories(): Promise<categoryDto[] | null> {
     try {
         
-        const response = await new Api().userAuthenticated.get('category')
+        const response = await new Api().userAll.get('category')
         return response.data;
 
     } catch (error: any) {
