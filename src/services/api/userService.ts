@@ -1,4 +1,5 @@
 import { ErrorMessageDto } from "../../dtos/ErrorMessageDto";
+import { findAllUsersDto } from "../../dtos/FindUsersDto";
 import { userDto } from "../../dtos/userDto";
 import Api from "./Api";
 import Cookies from 'cookies-ts'
@@ -77,6 +78,34 @@ export class UserService {
                 } as ErrorMessageDto
             }
 
+            return {
+                title: error.response.data.title,
+                message: error.response.data.message,
+                status: error.response.status
+            } as ErrorMessageDto
+        }
+    }
+
+    public async findAllUsers(): Promise<findAllUsersDto | ErrorMessageDto> {
+        try {
+            let users = (await this.userAuthenticated.get('auth/dashboard/user')).data as findAllUsersDto;
+
+            return users;
+        } catch (error: any) {
+            return {
+                title: error.response.data.title,
+                message: error.response.data.message,
+                status: error.response.status
+            } as ErrorMessageDto
+        }
+    }
+
+    public async findAllAdmin(): Promise<findAllUsersDto | ErrorMessageDto> {
+        try {
+            let admins = (await this.userAuthenticated.get('auth/dashboard/admin')).data as findAllUsersDto;
+
+            return admins;
+        } catch (error: any) {
             return {
                 title: error.response.data.title,
                 message: error.response.data.message,
