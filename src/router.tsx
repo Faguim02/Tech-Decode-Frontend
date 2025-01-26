@@ -11,6 +11,7 @@ import DashBoardPage from "./pages/DashBoardPage"
 import NewsAdmin from "./pages/NewsAdmin"
 import CategoryAdmin from "./pages/CategoryAdmin"
 import CreateNewsAdmin from "./pages/CreateNewsAdmin"
+import NotFoundPage from "./pages/NotFoundPage"
 
 export const Routers = () => {
   return (
@@ -27,7 +28,7 @@ export const Routers = () => {
           <Route path="/admin/news" element={<NewsAdmin/>}/>
           <Route path="/admin/category" element={<CategoryAdmin/>}/>
           <Route path="/admin/createNews" element={<CreateNewsAdmin/>}/>
-          <Route path="*" element={<h1>Not Found</h1>}/>
+          <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
 
         <FooterComponent/>

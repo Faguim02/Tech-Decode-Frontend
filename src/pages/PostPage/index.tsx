@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom"
 import { Skeleton, useToast } from "@chakra-ui/react"
 import CommentService from "../../services/api/commentService"
 import { commentDto } from "../../dtos/ComentDto"
+import TextFormatter from "../../components/TextFormatter"
 
 export const PostPage = () => {
 
@@ -136,7 +137,7 @@ export const PostPage = () => {
       </section>
 
       <p className="text-justify text-slate-600 px-4 md:w-1/2">
-      {post.description}
+        <TextFormatter content={post.description as string}/>
       </p>
 
       <a href={post.font} className="text-blue-600 font-bold px-4 md:w-1/2">Fonte da notícia</a>
